@@ -45,53 +45,135 @@ body::after{
 
 /* ================= TOP GOV BAR ================= */
 .top-bar{
-  background:#0b3d1b;
-  height:50px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  padding:0 40px;
-  color:#fff;
   position:relative;
+  background:#e6e6e6;   /* light grey */
+  padding:10px 30px;
+  overflow:hidden;
 }
-
-.top-bar::before{
+.top-bar::after{
   content:"";
   position:absolute;
-  left:0;
   top:0;
-  width:260px;
+  right:0;
+  width:1600px;   /* pehle 300px tha – ab bada */
   height:100%;
-  background:#0b3d1b;
-  clip-path:polygon(0 0, 80% 0, 100% 100%, 0% 100%);
-}
-
-.top-content{
-  display:flex;
-  align-items:center;
-  gap:12px;
+  background:#0b3d1f;
+  clip-path:polygon(30% 0,100% 0,100% 100%,35% 100%);
   z-index:2;
 }
 
-.color-box{width:18px;height:18px;cursor:pointer;}
-.red{background:#c92a2a;}
-.green{background:#2b8a3e;}
-.blue{background:#1864ab;}
-.yellow{background:#f59f00;}
+/* Full top thin green line */
+.top-bar::before{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:5000%;
+  height:4px;
+  background:#0b3d1f;
+  z-index:2;
+}
 
-.font-btn{
-  border:1px solid #fff;
-  padding:3px 8px;
+/* Light green border behind dark shape */
+.top-bar .shape-border{
+  position:absolute;
+  top:0;
+  right:500;
+ width:1500px;   /* medium width */
+  height:100%;
+  background:#0b3d1f;
+  clip-path:polygon(25% 0,100% 0,100% 100%,50% 100%);
+  z-index:1;
+}
+/* Default (Desktop) */
+.top-content{
+  position:relative;
+  z-index:9;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:12px;
+  color:#fff;
+}
+
+
+/* Color Boxes */
+.color-box{
+  width:18px;
+  height:18px;
   cursor:pointer;
 }
 
-#datetime{margin-left:10px;font-weight:500;}
-.login{margin-left:15px;cursor:pointer;}
+.red{background:#c92a2a;}
+.green{background:#1d7c3a;}
+.blue{background:#1864ab;}
+.yellow{background:#f59f00;}
+
+/* Font Buttons */
+.font-btn{
+  border:1px solid #fff;
+  padding:2px 6px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* Date & Login */
+#datetime{
+  margin-left:10px;
+}
+
+.login{
+  cursor:pointer;
+  font-weight:500;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:768px){
+
+ .top-content{
+    justify-content:space-between;  /* left & right space */
+ }
+  #datetime{
+    width:100%;
+    text-align:center;
+    margin:5px 0;
+  }
+
+  .login{
+    margin-left:auto;
+    padding:6px 14px;
+    background:#1d7c3a;
+    color:#fff;
+    border-radius:20px;
+    font-weight:600;
+    font-size:14px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    transition:0.3s;
+  }
+
+  .login:hover{
+    background:#145c2a;
+    transform:translateY(-2px);
+  }
+
+}
+/* Mobile me hide */
+@media (max-width:768px){
+  .color-box,
+  .font-btn{
+    display:none;
+  }
+}
+
 
 /* ================= HEADER ================= */
 .main-header{
   background:#eef3f1;
   padding:15px 40px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:url("Untitled\ design\ \(4\).png") center center / cover no-repeat;
 }
 
 .logo-section{
@@ -101,11 +183,12 @@ body::after{
 }
 
 .logo-left{height:85px;}
-.logo-right{height:80px;}
+.logo-right{height:95px;}
+.logo-center{height:95px;}
 
 .title-section h1{
   font-family:'Source Serif 4',serif;
-  font-size:42px;
+  font-size:45px;
   color:var(--primary);
 }
 
@@ -113,14 +196,50 @@ body::after{
   font-size:20px;
   color:#555;
 }
+.right-info{
+  position:absolute;
+  left:800px;
+  top:60px;
+  text-align:center;
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width:768px){
+  .right-info{
+    position:relative;
+    left:0;
+    top:0;
+    margin:10px auto;
+    text-align:center;
+  }
+}
+/* Text Styling */
+.right-info h2{
+  margin:0;
+  font-size:25px;
+}
+
+.right-info h3{
+  margin:3px 0;
+  font-size:25px;
+  
+}
+
+.right-info h4{
+  margin:2px 0;
+  font-size:12px;
+  
+}
+
 
 /* ================= NAVIGATION ================= */
 .main-nav{
-  background:#e3ece8;
-  border-top:1px solid #d5e1dc;
-  border-bottom:1px solid #d5e1dc;
+  background:linear-gradient(to right,#e1701a,#3a7d2c);
+  padding:0;
 }
 
+
+/* Desktop Menu */
 .nav-container{
   max-width:1600px;
   margin:auto;
@@ -129,170 +248,247 @@ body::after{
   padding:12px 40px;
 }
 
+/* Container */
+.nav-container{
+  max-width:1600px;
+  margin:auto;
+  display:flex;
+  gap:30px;
+  padding:12px 40px;
+  justify-content:flex-end;   /* 👈 Right side shift */
+}
+/* Links */
 .nav-container a{
   text-decoration:none;
-  color:#333;
-  font-weight:300;
+  color:white;
+  font-family:'Open Sans', sans-serif;
+  font-size:13px;
+  font-weight:400;
+  padding:6px 8px;           /* comfortable but compact */
+  text-shadow:0 1px 2px rgba(0,0,0,0.4);
 }
 
 .nav-container a:hover{
-  color:var(--primary);
+  background:linear-gradient(to right,#e1701a,#3a7d2c);
+  border-radius:4px;
 }
+
+/* Hamburger Button */
+.menu-toggle{
+  display:none;
+  font-size:26px;
+  color:white;
+  padding:10px 20px;
+  cursor:pointer;
+  text-align:left;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav-container{
+    display:none;
+    flex-direction:column;
+    gap:0;
+    padding:0;
+  }
+
+  .nav-container a{
+    display:block;
+    padding:15px;
+    border-top:1px solid rgba(255,255,255,0.2);
+    text-align:left;
+  }
+
+  .nav-container.active{
+    display:flex;
+  }
+}
+
 
 /* ================= HERO ================= */
+/* HERO BACKGROUND */
 .hero{
-  min-height:80vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:4rem 2rem;
-  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
-  url("banner for website.png") center/cover no-repeat;
-  color:#fff;
+  background: url('Banner\ Option\ 2.png') center/cover no-repeat;
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
 }
 
-.hero h2{
-  font-family:'Source Serif 4',serif;
-  font-size:4.5rem;
-  margin-bottom:1rem;
+/* Light overlay for faded paper effect */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  
 }
 
-.hero p{
-  font-size:1.2rem;
-  margin-bottom:2rem;
-}
-
-.search-actions{
-  display:flex;
-  gap:20px;
-  justify-content:center;
-}
-
-.search-box{
-  background:#fff;
-  color:var(--primary);
-  padding:1rem 1.5rem;
-  border-radius:8px;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.search-box:hover{
-  background:var(--primary);
-  color:#fff;
-}
-
-/* ================= FOOTER ================= */
-.main-footer{
-  background:hwb(127 36% 50%);
-  color:#fff;
-  padding:50px 40px 20px;
-}
-
-.footer-container{
-  max-width:1400px;
+.hero-content{
+  position:relative;
+  max-width:1200px;
   margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:40px;
 }
 
-.footer-column h3{
+/* Typography */
+.hero h4{
+  font-size:40px;
+  font-family:'Source Serif 4', serif;
+  margin-bottom:10px;
+  color:#1d7c3a;
+}
+
+.hero h1{
+  font-size:60px;
+  font-family:'Source Serif 4', serif;
   margin-bottom:15px;
+  color:#1d7c3a;
+}
+
+.subtitle{
+  font-size:22px;
+  margin-bottom:10px;
+  color:#444;
+}
+
+.org{
+  font-size:20px;
+  margin-bottom:40px;
+  color:#333;
+}
+
+/* SEARCH BOXES */
+.search-wrapper{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.search-card{
+  background:#e9e9e9;
+  width:500px;
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 3px 8px rgba(0,0,0,0.1);
+  text-align:left;
+}
+
+.search-header{
+  background:#dcdcdc;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   font-size:18px;
-  border-bottom:1px solid rgba(255,255,255,0.3);
-  padding-bottom:8px;
+  font-weight:500;
 }
 
-.footer-column ul{list-style:none;}
+.search-card p{
+  padding:20px;
+  font-size:18px;
+  color:#666;
+}
 
-.footer-column ul li{margin-bottom:10px;}
-
-.footer-column ul li a{
+/* Icon Button */
+.icon-btn{
+  background:#4b5d3a;
+  color:white;
+  padding:10px 14px;
+  border-radius:6px;
   text-decoration:none;
-  color:#ddd;
-  font-size:14px;
-  transition:0.3s;
+  font-size:18px;
 }
 
-.footer-column ul li a:hover{
-  color:#fff;
-  padding-left:5px;
+.icon-btn:hover{
+  background:#3a4a2a;
 }
 
-.footer-bottom{
-  text-align:center;
-  margin-top:40px;
-  padding-top:20px;
-  border-top:1px solid rgba(255,255,255,0.2);
-  font-size:14px;
-  color:#ccc;
+/* Responsive */
+@media(max-width:900px){
+  .hero h1{
+    font-size:42px;
+  }
+  .search-card{
+    width:100%;
+  }
 }
+
 
 /* ================= ABOUT SECTION ================= */
-.about-multi{
-  padding:100px 40px;
-  background:none;   /* Background hata diya */
+.about-slider{
+  position:relative;
+  padding:50px 25px;
+  overflow:hidden;
+  z-index:1;
 }
 
 .about-heading{
-  text-align:center;
-  font-family:'Source Serif 4',serif;
-  font-size:34px;
-  margin-bottom:80px;
-  color:#0b5d1e;   /* Normal Dark Green */
+  font-size:28px;
+  margin-bottom:40px;
+  color:#0b5d2a;
+   text-align:center;
+  width:100%;
 }
 
+.slider-frame{
+  max-width:900px;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+ 
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
 
+.slide{
+  display:none;
+  padding:30px;
+  animation:fade 1s ease;
+}
 
-.about-row{
-  max-width:1200px;
-  margin:80px auto;
+.slide.active{
   display:flex;
   align-items:center;
-  gap:60px;
-  opacity:0;
-  transform:translateY(40px);
-  transition:all 0.8s ease;
+  gap:30px;
 }
 
-.about-row.show{
-  opacity:1;
-  transform:translateY(0);
+.slide img{
+  width:300px;
+  border-radius:10px;
 }
 
-.about-row.reverse{flex-direction:row-reverse;}
-
-.about-img{flex:1;}
-
-.about-img img{
-  width:100%;
-  max-width:520px;
-  border:6px solid #fff;
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+.slide-text{
+  text-align:center;
 }
 
-.about-text{flex:1;}
-
-.about-text h3{
-  font-size:24px;
+.slide-text h3{
+  color:#0b5d2a;
   margin-bottom:15px;
-  color:#0b5d1e;   /* Same Green */
 }
 
-
-.about-text p{
-  line-height:1.9;
-  color:#444;
+@keyframes fade{
+  from{opacity:0;}
+  to{opacity:1;}
 }
+
+/* Responsive */
+@media(max-width:768px){
+  .slide.active{
+    flex-direction:column;
+    text-align:center;
+  }
+}
+
 
 
 /* ================= AI SECTION ================= */
 .next-section{
   position:relative;
-  padding:80px 40px;
+  padding:50px 25px;
   overflow:hidden;
   z-index:1;
 }
@@ -302,7 +498,7 @@ body::after{
   position:absolute;
   inset:0;
   background:url("Website Background_6.png") center center / cover no-repeat;
-  filter:blur(8px);
+  filter:blur(1px);
   transform:scale(1.1);
   z-index:-2;
 }
@@ -332,27 +528,326 @@ body::after{
   margin-top:40px;
 }
 
+/* Card */
 .ai-card{
-  background:#fff;
-  padding:30px;
-  text-align:center;
+  
+  padding:20px 10px;
   border-radius:15px;
   box-shadow:0 8px 25px rgba(0,0,0,0.05);
   transition:0.3s;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+
+  text-align:center;
+  min-height:50px;   /* Equal height fix */
 }
 
-.ai-card:hover{transform:translateY(-8px);}
-
-.ai-icon{
-  font-size:40px;
-  margin-bottom:15px;
+.ai-card:hover{
+  transform:translateY(-6px);
 }
 
-.ai-card h4{margin-bottom:10px;}
+/* Image Fix */
+.ai-card img{
+  width:150px;
+  height:150px;
+  object-fit:cover;      /* Important for perfect circle */
+  border-radius:50%;     /* Makes image circular */
+  border:4px solid #0b5d1e;  /* Green border */
+  padding:5px;
+  background:#fff;
+  margin-bottom:20px;
+  transition:0.3s ease;
+}
 
+/* Heading */
+.ai-card h4{
+  margin-bottom:12px;
+  font-size:18px;
+  color:#0b5d1e;
+}
+
+/* Paragraph */
 .ai-card p{
   font-size:14px;
   color:#666;
+  line-height:1.6;
+}
+.ai-subtext{
+  max-width:700px;
+  margin:15px auto 40px;
+  font-size:1.1rem;
+  color:#555;
+  line-height:1.6;
+  text-align:center;   /* 👈 ye important hai */
+}
+/* Hover effect */
+.ai-card img:hover{
+  transform:scale(1.05);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+/* ===========EXPLORE COLLECTION SECTION=========== */
+/* SECTION BACKGROUND */
+.explore-collection{
+  position:relative;
+  padding:50px 25px;
+  overflow:hidden;
+  z-index:1;
+}
+
+.explore-collection::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("Website Background_6.png") center center / cover no-repeat;
+  filter:blur(1px);
+  transform:scale(1.1);
+  z-index:-2;
+}
+
+.explore-collection::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,0.85);
+  z-index:-1;
+}
+
+/* SECTION TITLE */
+.section-title{
+  text-align:center;
+  font-family:'Source Serif 4',serif;
+  font-size:34px;
+  margin-bottom:80px;
+  color:#0b5d1e;
+}
+
+/* GRID LAYOUT */
+.explore-tabs{
+  max-width:1300px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+
+/* CARD DESIGN */
+.tab{
+  padding:20px 10px;
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.05);
+  transition:0.3s;
+
+  aspect-ratio:1/1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  position:relative;
+  overflow:hidden;
+
+  background:url("your-image-name.jpg") center center / cover no-repeat;
+}
+
+
+.tab:hover{
+  transform:translateY(-6px);
+}
+
+/* IMAGE STYLE */
+.tab img{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid #0b5d1e;
+  padding:5px;
+  background:lab(100% 0.01 -0.01 / 0.94);
+  margin-bottom:20px;
+  transition:0.3s ease;
+}
+
+.tab img:hover{
+  transform:scale(1.05);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* HEADING */
+.tab h4{
+  font-size:18px;
+  color:#0b5d1e;
+}
+
+/* ===========Quick Links=========== */
+.quick-links-section{
+  text-align:center;
+  padding:10px 30px;
+
+}
+
+.quick-title{
+  font-size:22px;
+  font-weight:600;
+  margin-bottom:50px;
+  color:#0b5d2a;
+}
+
+.quick-logos{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:40px;
+  padding-bottom:50px;
+}
+
+.quick-logos a img{
+  max-height:60px;
+  transition:0.3s ease;
+}
+
+.quick-logos a:hover img{
+  transform:scale(1.08);
+}
+/* ================= FOOTER ================= */
+.main-footer{
+  background: linear-gradient(to right, #0b3d1f, #0b3d1f, #023912, #013912);
+  color:#ffffff;
+  padding-top:60px;
+  font-family:'Poppins', sans-serif;
+}
+
+.footer-container{
+  width:90%;
+  margin:auto;
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap:40px;
+}
+
+.footer-col h3{
+  font-size:20px;
+  margin:20px 0;
+}
+
+.footer-col h4{
+  font-size:18px;
+  margin-bottom:25px;
+  position:center;
+}
+.footer-col h4::before{
+  content:"";
+  width:45px;
+  height:3px;
+  position:center;
+  top:-10px;
+}
+
+
+.footer-col p{
+  font-size:14px;
+  margin-bottom:10px;
+  color:#dcdcdc;
+}
+
+.footer-logo{
+  width:220px;
+}
+
+.footer-col ul{
+  list-style:none;
+  padding:0;
+}
+
+.footer-col ul li{
+  margin-bottom:12px;
+  border-bottom:1px dotted rgba(255,255,255,0.2);
+  padding-bottom:6px;
+}
+
+.footer-col ul li a{
+  text-decoration:none;
+  color:#dcdcdc;
+  font-size:14px;
+}
+
+.footer-col ul li a:hover{
+  color:#8bc34a;
+}
+.footer-col input{
+  width:100%;
+  padding:10px;
+  margin:15px 0;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.3);
+  color:#fff;
+  border-radius:5px;
+}
+
+.footer-col button{
+  padding:10px 20px;
+  background:transparent;
+  border:1px solid #8bc34a;
+  color:#fff;
+  cursor:pointer;
+  border-radius:5px;
+  transition:0.3s;
+}
+.footer-col button:hover{
+  background:#8bc34a;
+  color:#000;
+}
+.footer-col button::before,
+.footer-col button::after{
+  content: none !important;
+  display: none !important;
+}
+
+.social-icons a{
+    display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,0.4);
+  margin-right:10px;
+  transition:0.3s;
+  background:transparent;
+}
+.social-icons a img{
+  width:18px;
+  height:18px;
+}
+
+.social-icons a:hover{
+  background:#8bc34a;
+  transform:scale(1.1);
+}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.2);
+  margin-top:50px;
+  padding:20px 10%;
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  color:#ccc;
+  flex-wrap:wrap;
+}
+@media(max-width:900px){
+  .footer-container{
+    grid-template-columns:1fr;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+    text-align:center;
+    gap:10px;
+  }
 }
 
 /* ================= RESPONSIVE ================= */
@@ -370,7 +865,8 @@ body::after{
 
 <!-- TOP BAR -->
 <div class="top-bar">
-  <div class="top-content">
+    <div class="shape-border"></div>
+    <div class="top-content">
     <div class="color-box red" onclick="changeTheme('#c92a2a')"></div>
     <div class="color-box green" onclick="changeTheme('#1d7c3a')"></div>
     <div class="color-box blue" onclick="changeTheme('#1864ab')"></div>
@@ -388,127 +884,160 @@ body::after{
 <!-- HEADER -->
 <header class="main-header">
   <div class="logo-section">
-    <img src="left-logo.png" class="logo-left">
+    <img src="Right-logo.png" class="logo-left">
     <div class="title-section">
-      <h1>Herbarium</h1>
+      <h1>LWG Virtual Herbarium</h1>
       <p>A National Facility</p>
     </div>
-    <img src="right-logo.png" class="logo-right">
-  </div>
+    <img src="left-logo.png" class="logo-right">
+    <div class="right-info">
+      <div class="header-text">
+      <h2>वै.ओ.अ.प. - राष्ट्रीय वनस्पति अनुसंधान संस्थान</h2>
+      <h3>CSIR - National Botanical Research Institute</h3>
+      <h4>Rana Pratap Marg, Lucknow, India,राणा प्रताप मार्ग, लखनऊ, भारत</h4>
+</div>
+
 </header>
+
 
 <!-- NAVIGATION -->
 <nav class="main-nav">
-  <div class="nav-container">
-    <a href="#">HOME</a>
-    <a href="#">OUR TEAM</a>
-    <a href="#">VIRTUAL HERBARIUM</a>
-    <a href="#">PHOTO GALLERY</a>
-    <a href="#">FACILITIES</a>
-    <a href="#">CONTACT US</a>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <div class="nav-container" id="navMenu">
+    <a href="#">Home</a>
+    <a href="#">Our Team</a>
+    <a href="#">Virtual Herbarium</a>
+    <a href="#">Photo Gallery</a>
+    <a href="#">Facilities</a>
+    <a href="#">Contact Us</a>
   </div>
+
 </nav>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="hero">
-  <div>
-    <h2>Welcome to LWG Virtual Herbarium</h2>
-    <p>India's first AI-Powered Search & Recognition Engine for Herbarium</p>
-    <div class="search-actions">
-      <div class="search-box">Search with Image</div>
-      <div class="search-box">Search with Keyword</div>
+
+  <div class="hero-content">
+    <div class="logo-section">
+      <img src="left-logo.png" class="logo-center" alt="Herbarium Logo" style="width:120px;margin-bottom:20px;">
     </div>
+    <h4>Welcome to</h4>
+    <h1>LWG Virtual Herbarium</h1>
+    <p class="subtitle">India's first AI-Powered Search & Recognition Engine for Herbarium</p>
+    <p class="org"></p>
+
+    <div class="search-wrapper">
+
+      <!-- AI Visual Search -->
+      <div class="search-card">
+        <div class="search-header">
+          <span>AI Visual Recognition Search</span>
+          <a href="https://lwgherbarium.nbri.res.in/gallery" target="_blank" class="icon-btn">📷</a>
+        </div>
+        <p>Drop an image for visual species identification...</p>
+      </div>
+
+      <!-- Keyword Search -->
+      <div class="search-card">
+        <div class="search-header">
+          <span>Keyword Search</span>
+          <a href="http://192.168.1.74/webportal/DigitalHerberium" target="_blank" class="icon-btn">🔍</a>
+        </div>
+        <p><i>Search by species, collector, locality, family...</i></p>
+      </div>
+
+    </div>
+
   </div>
+
 </section>
+
 <!-- ABOUT HERBARIUM SECTION -->
 
-<section class="about-multi">
+<section class="about-slider">
 
   <h2 class="about-heading">About LWG Herbarium</h2>
 
-  <!-- ROW 1 -->
-  <div class="about-row">
-    <div class="about-img">
-      <img src="https://lwgherbarium.nbri.res.in/6.png" alt="Digitization">
-    </div>
-    <div class="about-text">
-      <h3>About Digitization</h3>
-      <p>
-        The institute is converting physical specimens into comprehensive
-        digital records utilizing high-resolution cameras and advanced scanners,
-        ensuring long-term preservation and global research accessibility.
-      </p>
-    </div>
-  </div>
+  <div class="slider-frame">
 
-  <!-- ROW 2 -->
-  <div class="about-row reverse">
-    <div class="about-img">
-      <img src="https://lwgherbarium.nbri.res.in/5.png" alt="Collection">
+    <div class="slide active">
+      <img src="About Digitization.png" alt="Digitization">
+      <div class="slide-text">
+        <h3>About Digitization</h3>
+        <p>
+          The institute is converting physical specimens into comprehensive
+          digital records utilizing high-resolution cameras and advanced scanners,
+          ensuring long-term preservation and global research accessibility.
+        </p>
+      </div>
     </div>
-    <div class="about-text">
-      <h3>Specimen Collection Archive</h3>
-      <p>
-        The herbarium houses thousands of authenticated plant specimens
-        collected from diverse ecological regions and preserved under
-        scientific protocols for taxonomy and biodiversity studies.
-      </p>
-    </div>
-  </div>
 
-  <!-- ROW 3 -->
-  <div class="about-row">
-    <div class="about-img">
-      <img src="https://lwgherbarium.nbri.res.in/7.png" alt="AI Research">
+    <div class="slide">
+      <img src="About LWG (485 x 343 px).jpg" alt="Collection">
+      <div class="slide-text">
+        <h3>Specimen Collection Archive</h3>
+        <p>
+          The herbarium houses thousands of authenticated plant specimens
+          collected from diverse ecological regions and preserved under
+          scientific protocols for taxonomy and biodiversity studies.
+        </p>
+      </div>
     </div>
-    <div class="about-text">
-      <h3>AI Integration & Research</h3>
-      <p>
-        AI-powered identification systems enhance plant recognition accuracy,
-        streamline taxonomic verification, and provide intelligent search
-        capabilities for researchers worldwide.
-      </p>
+
+    <div class="slide">
+      <img src="AI Search 250x195_orig logo.jpg" alt="AI Research">
+      <div class="slide-text">
+        <h3>AI Integration & Research</h3>
+        <p>
+          AI-powered identification systems enhance plant recognition accuracy,
+          streamline taxonomic verification, and provide intelligent search
+          capabilities for researchers worldwide.
+        </p>
+      </div>
     </div>
+
   </div>
 
 </section>
-
-
-
 
 <!-- AI FEATURES SECTION -->
 <section class="ai-section">
 
   <h2 class="section-title">AI Powered Virtual Herbarium</h2>
+   <p class="ai-subtext">
+    Use our AI-Powered & Digital search facilities to explore LWG Herbarium virtually.
+  </p>
 
   <div class="ai-cards">
 
     <div class="ai-card">
-     <img src="Icon_1.png" alt="AI Label Reading">
+     <img src="AI Lable Reading.png" alt="AI Label Reading">
       <h4>AI Label Reading</h4>
       <p>Digitizing & decoding herbarium labels</p>
     </div>
 
     <div class="ai-card">
-      <img src="Icon_2.png" alt="AI Label Reading">
+      <img src="Image Recognition.png" alt="AI Label Reading">
       <h4>Image Recognition</h4>
       <p>Identifying specimens from photos</p>
     </div>
 
     <div class="ai-card">
-      <img src="Icon 3.png" alt="AI Label Reading">
+      <img src="Smart Search.png" alt="AI Label Reading">
       <h4>Smart Search</h4>
       <p>By locality, collector, keyword matches</p>
     </div>
 
     <div class="ai-card">
-      <img src="Icon 4.png" alt="AI Label Reading">
+      <img src="Auto Links.png" alt="AI Label Reading">
       <h4>Auto Links</h4>
       <p>POWO / IPNI / JSTOR integration</p>
     </div>
 
     <div class="ai-card">
-      <img src="Icon_5.png" alt="AI Label Reading">
+      <img src="QR Specimens.jpeg" alt="AI Label Reading">
       <h4>QR Linked Specimens</h4>
       <p>Quick access via QR codes</p>
     </div>
@@ -516,79 +1045,193 @@ body::after{
   </div>
 
 </section>
+<!-- EXPLORE COLLECTION SECTION -->
+<section class="explore-collection">
 
-<!-- FOOTER -->
-<footer class="main-footer">
-  <div class="footer-container">
+  <h2 class="section-title">Explore the Collection</h2>
+   
+  <div class="explore-tabs">
 
-    <!-- Quick Links -->
-    <div class="footer-column">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#">POWO</a></li>
-        <li><a href="#">IPNI</a></li>
-        <li><a href="#">JSTOR</a></li>
-        <li><a href="#">GBIF</a></li>
-        <li><a href="#">WorldFlora</a></li>
-        <li><a href="#">BHL</a></li>
-      </ul>
+    <div class="tab">
+     <img src="Taxonomy (250 x 195 px).jpg" alt="By Taxonomy">
+      <h4>By Taxonomy</h4>
     </div>
 
-    <!-- Menu -->
-    <div class="footer-column">
-      <h3>Menu</h3>
+    
+    <div class="tab">
+      <img src="Collector (250 x 195 px).jpg" alt="By Collector">
+      <h4>By Collector</h4>
+    </div>
+
+    <div class="tab">
+      <img src="Location (250 x 195 px).jpg" alt="By Geography">
+      <h4>By Geography</h4>
+    </div>
+
+    <div class="tab">
+      <img src="Historical (250 x 195 px).jpg" alt="Historical Collections">
+      <h4>Historical Collections</h4>
+    </div>
+
+    <div class="tab">
+      <img src="About DronAi.png" alt="AI Visual ID">
+      <h4>AI Visual ID</h4>
+    </div>
+  </div>
+
+</section>
+  <!-- Quick Link Heading -->
+<section class="quick-links-section"></section>
+  <h2 class="section-title">Quick Links</h2>
+
+    <div class="quick-logos">
+
+    <a href="https://www.ipni.org/" target="_blank">
+      <img src="IPNI-Logo.jpg" alt="IPNI">
+    </a>
+
+    <a href="https://www.nbri.res.in/" target="_blank">
+      <img src="powo-logo.jpg" alt="POWO">
+    </a>
+
+     <a href="https://wfoplantlist.org/" target="_blank">
+      <img src="wfo-logo.jpg" alt="WFO">
+    </a>
+
+    <a href="https://www.indexfungorum.org/" target="_blank">
+      <img src="if-logo.gif" alt="IndexFungorum">
+    </a>
+
+    <a href="https://www.gbif.org/" target="_blank">
+      <img src="gbif-logo.png" alt="GBIF">
+    </a>
+
+    <a href="https://www.stor.org/" target="_blank">
+      <img src="jstor_logo.png" alt="JSTOR">
+    </a>
+
+    <a href="https://www.tropicos.org/" target="_blank">
+      <img src="tropicos-logo.png" alt="Tropicos">
+    </a>
+
+    <a href="https://www.biodiversitylibrary.org/" target="_blank">
+      <img src="bhl-logo.jpg" alt="BHL">
+    </a>
+
+  </div>
+
+</section>
+
+<!-----------------main-footer-------------- -->
+<footer class="main-footer">
+
+  <div class="footer-container">
+
+    <!-- LEFT SECTION -->
+    <div class="footer-col">
+      <img src="nbri-herbarium-logo3.png" class="footer-logo" alt="Herbarium Logo">
+
+      <h3>CSIR-National Botanical<br>Research Institute</h3>
+
+      <p>📍 436, Pratap Marg, Lucknow - 226001, Uttar Pradesh, India</p>
+      <p>✉ director@nbri.res.in</p>
+      <p>📞 +91-522-2297802, +91-522-2205839</p>
+
+      <div class="social-icons">
+
+  <a href="https://www.linkedin.com/" target="_blank">
+    <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn">
+  </a>
+
+  <a href="https://teams.live.com/free" target="_blank">
+    <img src="tems.png" alt="Teams">
+  </a>
+
+  <a href="https://x.com/" target="_blank">
+    <img src="https://x.com/favicon.ico" alt="X">
+  </a>
+
+  <a href="https://www.facebook.com/" target="_blank">
+    <img src="https://www.facebook.com/favicon.ico" alt="Facebook">
+  </a>
+
+</div>
+
+    </div>
+
+    <!-- USEFUL LINKS -->
+    <div class="footer-col">
+      <h4>Usefull Links</h4>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Our Team</a></li>
+        <li><a href="#">About Us</a></li>
         <li><a href="#">Virtual Herbarium</a></li>
         <li><a href="#">Photo Gallery</a></li>
         <li><a href="#">Facilities</a></li>
+        <li><a href="#">Our Team</a></li>
         <li><a href="#">Contact Us</a></li>
       </ul>
     </div>
 
-    <!-- Essential Links -->
-    <div class="footer-column">
-      <h3>Essential Links</h3>
+    <!-- IMPORTANT LINKS -->
+    <div class="footer-col">
+      <h4>Important Links</h4>
       <ul>
-        <li><a href="#">CSIR</a></li>
-        <li><a href="#">NBRI</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Accessibility Statement</a></li>
+        <li><a href="#">Site Map</a></li>
+        <li><a href="#">Contact</a></li>
       </ul>
     </div>
 
-    <!-- Contact -->
-    <div class="footer-column">
-      <h3>Contact</h3>
-      <ul>
-        <li><a href="#">Team</a></li>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Terms of Use</a></li>
-      </ul>
+    <!-- SUBSCRIBE -->
+    <div class="footer-col">
+      <h4>Subscribe Us</h4>
+      <p>Subscribe us to get latest news and useful tips.</p>
+
+      <input type="email" placeholder="Your email address">
+      <button>SIGN UP</button>
+      <h4 class="visitor-title">Visitors</h4>
     </div>
 
   </div>
 
+  <!-- BOTTOM BAR -->
   <div class="footer-bottom">
-    © 2026 LWG Virtual Herbarium · Designed for global botanical research
+    <p>Copyright © 2026 Herbarium Portal NBRI</p>
+    <p>Last Updated On : 04/10/2021 05:17PM</p>
+    <p>Developed by Yukti Educational Pvt Ltd</p>
   </div>
+
 </footer>
+
 
 <script>
 /* LIVE DATE TIME */
 function updateDateTime(){
-  const now=new Date();
-  const day=String(now.getDate()).padStart(2,'0');
-  const month=String(now.getMonth()+1).padStart(2,'0');
-  const year=now.getFullYear();
-  let hours=now.getHours();
-  const minutes=String(now.getMinutes()).padStart(2,'0');
-  const seconds=String(now.getSeconds()).padStart(2,'0');
-  const ampm=hours>=12?'PM':'AM';
-  hours=hours%12; hours=hours?hours:12;
-  hours=String(hours).padStart(2,'0');
-  document.getElementById("datetime").innerHTML=
-  `${day}/${month}/${year} - ${hours}:${minutes}:${seconds} ${ampm}`;
+  const now = new Date();
+
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const dayName = days[now.getDay()];
+
+  const day = String(now.getDate()).padStart(2,'0');
+  const month = String(now.getMonth()+1).padStart(2,'0');
+  const year = now.getFullYear();
+
+  let hours = now.getHours();
+  const minutes = String(now.getMinutes()).padStart(2,'0');
+  const seconds = String(now.getSeconds()).padStart(2,'0');
+
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  hours = String(hours).padStart(2,'0');
+
+  document.getElementById("datetime").innerHTML =
+  `${dayName}, ${day}/${month}/${year} - ${hours}:${minutes}:${seconds} ${ampm}`;
 }
+
 setInterval(updateDateTime,1000);
 updateDateTime();
 
@@ -622,7 +1265,24 @@ function revealOnScroll(){
 window.addEventListener('scroll', revealOnScroll);
 revealOnScroll();
 </script>
+<script>
+function toggleMenu(){
+  document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
+<script>
+let slides = document.querySelectorAll(".slide");
+let index = 0;
 
+function showSlide() {
+  slides.forEach(slide => slide.classList.remove("active"));
+  index++;
+  if(index >= slides.length) index = 0;
+  slides[index].classList.add("active");
+}
+
+setInterval(showSlide, 3000);
+</script>
 
 </body>
 </html>
